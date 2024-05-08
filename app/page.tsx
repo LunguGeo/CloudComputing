@@ -27,7 +27,7 @@ export default function Home({}) {
   
   const addTodo = async()=>{
     if(!newTodoText) return;
-    const responde = await fetch("http://localhost:3000/api",{
+    const responde = await fetch("https://cloud-computing-lovat.vercel.app/api",{
       method: 'POST',
       body: JSON.stringify({text: newTodoText}),
       headers: {
