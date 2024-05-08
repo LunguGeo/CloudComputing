@@ -16,7 +16,7 @@ export default function Home({}) {
   const [editTodo, setEditTodo] = useState<Todo | null> (null);
 
   useEffect(()=>{
-    fetch('http://localhost:3000/api')
+    fetch('https://cloud-computing-lovat.vercel.app/api')
     .then((res)=>res.json())
     .then((data)=>{
       setTodos(data);
@@ -47,7 +47,7 @@ export default function Home({}) {
   const handleSave = async()=> {
     if (!editTodo) return;
 
-    const response = await fetch("http://localhost:3000/api",{
+    const response = await fetch("https://cloud-computing-lovat.vercel.app/api",{
       method: "PUT",
       body: JSON.stringify({
         id: editTodo._id,
@@ -70,7 +70,7 @@ export default function Home({}) {
   };
 
   const deleteTodo = async(id:string)=>{
-    const response = await fetch("http://localhost:3000/api",{
+    const response = await fetch("https://cloud-computing-lovat.vercel.app/api",{
       method: "DELETE",
       body: JSON.stringify({id}),
       headers:  {
@@ -83,7 +83,7 @@ export default function Home({}) {
 };
 
 const toggleTodo = async(id: string, completed: boolean, text: string) =>{
-  const response = await fetch("http://localhost:3000/api",{
+  const response = await fetch("https://cloud-computing-lovat.vercel.app/api",{
       method: "PUT",
       body: JSON.stringify({id, completed: !completed, text}),
       headers:  {
