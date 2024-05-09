@@ -23,7 +23,7 @@ export default function Home(){
       return
     }
     try {
-      const res = await fetch('https://cloud-computing-lovat.vercel.app/api/form',{
+      const res = await fetch('http://localhost:3000/api/form',{
         method: 'POST',
         headers:{
           'Content-Type': 'application/json'
