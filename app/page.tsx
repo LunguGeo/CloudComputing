@@ -2,6 +2,8 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { text } from "stream/consumers";
+import Link from 'next/link';
+
 
 type Todo ={
   _id: string,
@@ -16,7 +18,7 @@ export default function Home({}) {
   const [editTodo, setEditTodo] = useState<Todo | null> (null);
 
   useEffect(()=>{
-    fetch('https://cloud-computing-lovat.vercel.app/api')
+    fetch('https://cloud-computing-lovat.vercel.app/api/todo')
     .then((res)=>res.json())
     .then((data)=>{
       setTodos(data);
@@ -27,7 +29,7 @@ export default function Home({}) {
   
   const addTodo = async()=>{
     if(!newTodoText) return;
-    const responde = await fetch("https://cloud-computing-lovat.vercel.app/api",{
+    const responde = await fetch("https://cloud-computing-lovat.vercel.app/api/todo",{
       method: 'POST',
       body: JSON.stringify({text: newTodoText}),
       headers: {
@@ -47,7 +49,7 @@ export default function Home({}) {
   const handleSave = async()=> {
     if (!editTodo) return;
 
-    const response = await fetch("https://cloud-computing-lovat.vercel.app/api",{
+    const response = await fetch("https://cloud-computing-lovat.vercel.app/api/todo",{
       method: "PUT",
       body: JSON.stringify({
         id: editTodo._id,
@@ -70,7 +72,7 @@ export default function Home({}) {
   };
 
   const deleteTodo = async(id:string)=>{
-    const response = await fetch("https://cloud-computing-lovat.vercel.app/api",{
+    const response = await fetch("https://cloud-computing-lovat.vercel.app/api/todo",{
       method: "DELETE",
       body: JSON.stringify({id}),
       headers:  {
@@ -83,7 +85,7 @@ export default function Home({}) {
 };
 
 const toggleTodo = async(id: string, completed: boolean, text: string) =>{
-  const response = await fetch("https://cloud-computing-lovat.vercel.app/api",{
+  const response = await fetch("https://cloud-computing-lovat.vercel.app/api/todo",{
       method: "PUT",
       body: JSON.stringify({id, completed: !completed, text}),
       headers:  {
@@ -109,7 +111,7 @@ const toggleTodo = async(id: string, completed: boolean, text: string) =>{
         value={editTodo.text!}
         onChange={(e)=> setEditTodo({...editTodo, text: e.target.value})}
         />
-        <button onClick={handleSave} className="bg-slate-800 px-6 py-2 rounded-lg my-7 text-green-400 text-lg uppercase font-semibold ">Save</button>
+        <button onClick={handleSave} className="bg-purple-800 px-6 py-2 rounded-lg my-7 text-yellow-400 text-lg uppercase font-semibold ">Save</button>
         </>
         ) : (
         <>
@@ -120,7 +122,7 @@ const toggleTodo = async(id: string, completed: boolean, text: string) =>{
         value={ newTodoText}
         onChange={(e)=> setNewTodoText(e.target.value)}
         />
-        <button onClick={addTodo} className="bg-slate-800 px-6 py-2 rounded-lg my-7 text-green-400 text-lg uppercase font-semibold ">Add Todo</button>
+        <button onClick={addTodo} className="bg-purple-800 px-6 py-2 rounded-lg my-7 text-yellow-400 text-lg uppercase font-semibold ">Add Todo</button>
         </>
         )}
       </div>
@@ -138,7 +140,7 @@ const toggleTodo = async(id: string, completed: boolean, text: string) =>{
           <>
           {!isLoading && todos && todos.map((todo: Todo)=>(
             <li key={todo._id}
-            className="bg-slate-900 px-6 py-5 rounded-lg my-3 hover:text-green-400 text-lg w-full flex justify-between items-start">
+            className="bg-purple-900 px-6 py-5 rounded-lg my-3 hover:text-green-400 text-lg w-full flex justify-between items-start">
               <div className="flex justify-start items-start w-8/12">
                 <input type="checkbox"
                 className="w-5 h-5 cursor-pointermt-1"
@@ -159,6 +161,11 @@ const toggleTodo = async(id: string, completed: boolean, text: string) =>{
         )}
       </ul>
     </div>
+    <Link href="/form">
+        <button className="bg-purple-600 px-6 py-3 rounded-lg my-7 text-white text-lg uppercase font-semibold hover:bg-purple-700">
+          Go to Form
+        </button>
+    </Link>
    </div>
   );
 }

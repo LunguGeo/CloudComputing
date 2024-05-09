@@ -29,6 +29,7 @@ export async function POST(req: NextRequest) {
         return NextResponse.json(error, {status:500});
         }
 }
+  
 
 export async function PUT(req: NextRequest) {
     const {id, text, completed} = await req.json();
@@ -64,9 +65,6 @@ export async function DELETE(req: NextRequest) {
     }catch(error){
     return NextResponse.json(error, {status:500});
     }
+
 }
-
-
-    
-
 
