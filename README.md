@@ -1,7 +1,7 @@
 Aplicație de manageriat timpul
 -To do List-
 
-Link Video – prezentare proiect: 
+Link Video:  https://www.youtube.com/watch?v=v1LJcDDSNls&ab_channel=GeorgianaLUNGU
 
 Link publicare: https://cloud-computing-lovat.vercel.app/
 
